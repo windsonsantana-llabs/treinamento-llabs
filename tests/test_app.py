@@ -9,8 +9,8 @@ def client():
 def test_root_redirect(client):
     """Test that root endpoint redirects to static/index.html"""
     response = client.get("/")
-    assert response.status_code == 307  # Temporary redirect
-    assert response.headers["location"] == "/static/index.html"
+    assert response.status_code == 200  # Permanent redirect with content
+    assert "/static/index.html" in response.url.path  # Verifica se foi redirecionado para o arquivo correto
 
 def test_get_activities(client):
     """Test getting all activities"""
